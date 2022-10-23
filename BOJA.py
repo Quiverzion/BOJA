@@ -44,41 +44,64 @@ async def clean(ctx, amount: int):
 
 @bot.command()
 async def levelup(ctx, target:int):
-    await ctx.message.delete()
-    report_channel = bot.get_channel(1033578409936310334)
+    if ctx.message.author.guild_permissions.administrator:
+        await ctx.message.delete()
+        report_channel = bot.get_channel(1033578409936310334)
 
-    target_member = bot.get_guild(1031900696632639488).get_member(target)
-    target_user = bot.get_user(target)
+        target_member = bot.get_guild(1031900696632639488).get_member(target)
+        target_user = bot.get_user(target)
 
-    role_trainee = bot.get_guild(1031900696632639488).get_role(1031921811035791381)
-    role_b_one = bot.get_guild(1031900696632639488).get_role(1031920357948530740)
-    role_b_two = bot.get_guild(1031900696632639488).get_role(1031920409198743634)
-    role_b_three = bot.get_guild(1031900696632639488).get_role(1031920441427755038)
-    role_b_four = bot.get_guild(1031900696632639488).get_role(1031919602889924608)
+        role_trainee = bot.get_guild(1031900696632639488).get_role(1031921811035791381)
+        role_b_one = bot.get_guild(1031900696632639488).get_role(1031920357948530740)
+        role_b_two = bot.get_guild(1031900696632639488).get_role(1031920409198743634)
+        role_b_three = bot.get_guild(1031900696632639488).get_role(1031920441427755038)
+        role_b_four = bot.get_guild(1031900696632639488).get_role(1031919602889924608)
 
-    if target_member.roles[1] == role_trainee:
-        await target_member.remove_roles((role_trainee))
-        await target_member.add_roles((role_b_one))
-        if target_user.dm_channel is None:
-            channel = await target_user.create_dm()
-        else:
-            channel = target_user.dm_channel
-        await channel.send(f"{target_user.mention} 축하합니다. **'이병'**으로 승급하였습니다.")
-        await report_channel.send(f"> {target_user.mention}이(가) **'훈련병'**에서 **'이병'**으로 승급하였습니다.")
+        if target_member.roles[1] == role_trainee:
+            await target_member.remove_roles((role_trainee))
+            await target_member.add_roles((role_b_one))
+            if target_user.dm_channel is None:
+                channel = await target_user.create_dm()
+            else:
+                channel = target_user.dm_channel
+            await channel.send(f"{target_user.mention} 축하합니다. **'이병'**으로 승급하였습니다.")
+            await report_channel.send(f"> {target_user.mention}이(가) **'훈련병'**에서 **'이병'**으로 승급하였습니다.")
 
-    elif target_member.roles[1] == role_b_one:
-        await target_member.remove_roles((role_b_one))
-        await target_member.add_roles((role_b_two))
-        if target_user.dm_channel is None:
-            channel = await target_user.create_dm()
-        else:
-            channel = target_user.dm_channel
-        await channel.send(f"{target_user.mention} 축하합니다. **'일병'**으로 승급하였습니다.")
-        await report_channel.send(f"> {target_user.mention}이(가) **'이병'**에서 **'일병'**으로 승급하였습니다.")
+        elif target_member.roles[1] == role_b_one:
+            await target_member.remove_roles((role_b_one))
+            await target_member.add_roles((role_b_two))
+            if target_user.dm_channel is None:
+                channel = await target_user.create_dm()
+            else:
+                channel = target_user.dm_channel
+            await channel.send(f"{target_user.mention} 축하합니다. **'일병'**으로 승급하였습니다.")
+            await report_channel.send(f"> {target_user.mention}이(가) **'이병'**에서 **'일병'**으로 승급하였습니다.")
+        
+        elif target_member.roles[1] == role_b_two:
+            await target_member.remove_roles((role_b_two))
+            await target_member.add_roles((role_b_three))
+            if target_user.dm_channel is None:
+                channel = await target_user.create_dm()
+            else:
+                channel = target_user.dm_channel
+            await channel.send(f"{target_user.mention} 축하합니다. **'상병'**으로 승급하였습니다.")
+            await report_channel.send(f"> {target_user.mention}이(가) **'일병'**에서 **'상병'**으로 승급하였습니다.")
+
+        elif target_member.roles[1] == role_b_three:
+            await target_member.remove_roles((role_b_three))
+            await target_member.add_roles((role_b_four))
+            if target_user.dm_channel is None:
+                channel = await target_user.create_dm()
+            else:
+                channel = target_user.dm_channel
+            await channel.send(f"{target_user.mention} 축하합니다. **'병장'**으로 승급하였습니다.")
+            await report_channel.send(f"> {target_user.mention}이(가) **'상병'**에서 **'병장'**으로 승급하였습니다.")
 
 @bot.command()
-async def rts(ctx):
-    await ctx.message.delete()
-    await ctx.channel.send()
+async def speak(ctx, channel_id:int, chat:str):
+    if ctx.message.author.guild_permissions.administrator:
+            await ctx.message.delete()
+            channel = bot.get_channel(channel_id)
+            await channel.send(chat)
 
 bot.run("MTAzMjYzNzc2MzY2MjY0NzM0Nw.G9fZSs.GwPNXxohXku3ERirvSWNvHTDnfPUq9jNCmoURs")
