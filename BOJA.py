@@ -81,4 +81,4 @@ async def rts(ctx):
     await ctx.message.delete()
     await ctx.channel.send()
 
-bot.run("MTAzMjYzNzc2MzY2MjY0NzM0Nw.GodkWN.V2caLHRpX3BM-REB2pWcFO_BU3F7az9biGYukg")
+bot.run("MTAzMjYzNzc2MzY2MjY0NzM0Nw.G9fZSs.GwPNXxohXku3ERirvSWNvHTDnfPUq9jNCmoURs")
