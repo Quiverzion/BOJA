@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands, tasks
+import os
 
 bot = commands.Bot(command_prefix=';',
                    status=discord.Status.online, intents=discord.Intents.all())
@@ -104,4 +105,5 @@ async def speak(ctx, channel_id:int, chat:str):
             channel = bot.get_channel(channel_id)
             await channel.send(chat)
 
-bot.run("MTAzMjYzNzc2MzY2MjY0NzM0Nw.G9fZSs.GwPNXxohXku3ERirvSWNvHTDnfPUq9jNCmoURs")
+token = os.environ.get('token')
+bot.run(token)
