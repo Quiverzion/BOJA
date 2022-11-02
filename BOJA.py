@@ -99,7 +99,7 @@ async def levelup(ctx, target:int):
             await report_channel.send(f"> {target_user.mention}이(가) **'상병'**에서 **'병장'**으로 승급하였습니다.")
 
 @bot.command()
-async def speak(ctx, channel_id:int, chat:str):
+async def speak(ctx, channel_id:int, *, chat:str):
     if ctx.message.author.guild_permissions.administrator:
             await ctx.message.delete()
             channel = bot.get_channel(channel_id)
